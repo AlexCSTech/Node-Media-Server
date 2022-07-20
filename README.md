@@ -16,7 +16,7 @@ This is a fork of [illuspas/Node-Media-Server](https://github.com/illuspas/Node-
 
 | Date | Content | Commit |
 | ---- | ---- | ---- |
-| 2022.7.20 | Fix a critial bug in dynamic pulling | https://github.com/AlexCSTech/Node-Media-Server/commit/1c2a807be803b686b323c806b4f315bc99e1cef9 |
+| 2022.7.20 | Fix a critial bug in dynamic pulling | [1c2a807](https://github.com/AlexCSTech/Node-Media-Server/commit/1c2a807be803b686b323c806b4f315bc99e1cef9) |
 
 **If you like this project you can support the original author.** 
 
