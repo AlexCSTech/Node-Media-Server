@@ -7,6 +7,7 @@ const URL = require('url');
 const Logger = require('./node_core_logger');
 const context = require('./node_core_ctx');
 const NodeCoreUtils = require('./node_core_utils');
+const _ = require('lodash');
 
 const FlvPacket = {
   create: (payload = null, type = 0, time = 0) => {
@@ -81,8 +82,48 @@ class NodeFlvSession {
     }
   }
 
-  stop() {
-    if (this.isStarting) {
+  fetchStop() {
+    let relayTaskPaths = this.config.relay !== undefined ? _.map(this.config.relay.tasks, (taskObject) => {
+      return '/' + taskObject.app + '/' + taskObject.name;
+    }) : [];
+    let streamPaths = [];
+    for (let session of context.sessions.values()) {
+      if (session.TAG === "rtmp" && session.players.size !== 0) {
+        streamPaths.push(this.getStreamPath(session))
+      }
+    }
+
+    for (let session of context.sessions.values()) {
+      let streamPath = this.getStreamPath(session);
+      let tag = session.hasOwnProperty('TAG') ? session.TAG : null;
+      if (!streamPath || streamPaths.indexOf(streamPath) === -1) {
+        switch (tag) {
+          case 'rtmp':
+            if (relayTaskPaths.indexOf(session.publishStreamPath) !== -1 ) {
+              Logger.log('stop rtmp session', session.id);
+              session.stop();
+            }
+            break;
+          case 'http-flv':
+            case 'websocket-flv':
+            Logger.log('stop flv session', session.id);
+            session.realStop(true);
+            break;
+            default:
+        }
+      }
+    }
+  }
+
+  getStreamPath(session) {
+    let regRes = /\/(.*)\/(.*)/gi.exec(session.publishStreamPath || session.playStreamPath);
+    if (regRes === null) return null;
+    let [app, stream] = _.slice(regRes, 1);
+    return `${app}/${stream}`;
+  }
+
+  realStop(isStarting) {
+    if (isStarting) {
       this.isStarting = false;
       let publisherId = context.publishers.get(this.playStreamPath);
       if (publisherId != null) {
@@ -96,6 +137,11 @@ class NodeFlvSession {
       context.idlePlayers.delete(this.id);
       context.sessions.delete(this.id);
     }
+  }
+
+  stop() {
+    this.realStop(this.isStarting);
+    this.fetchStop();
   }
 
   onReqClose() {
