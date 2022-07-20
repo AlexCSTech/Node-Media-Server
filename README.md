@@ -17,6 +17,7 @@ This is a fork of [illuspas/Node-Media-Server](https://github.com/illuspas/Node-
 | Date | Content | Commit |
 | ---- | ---- | ---- |
 | 2022.7.20 | Fix a critial bug in dynamic pulling | [1c2a807](https://github.com/AlexCSTech/Node-Media-Server/commit/1c2a807be803b686b323c806b4f315bc99e1cef9) |
+| 2022.7.20 | Add custom ffmpeg options in relay | [154b3a4](https://github.com/AlexCSTech/Node-Media-Server/commit/154b3a4dc780b61f059eb0c99ab36308345e84c7) |
 
 **If you like this project you can support the original author.** 
 
