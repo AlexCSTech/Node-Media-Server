@@ -10,8 +10,18 @@
 A Node.js implementation of RTMP/HTTP-FLV/WS-FLV/HLS/DASH Media Server  
 [中文介绍](https://github.com/illuspas/Node-Media-Server/blob/master/README_CN.md)  
 
-**If you like this project you can support me.**  
-<a href="https://www.buymeacoffee.com/illuspas" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-white.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
+This is a fork of [illuspas/Node-Media-Server](https://github.com/illuspas/Node-Media-Server). 
+
+**Changelog after the fork**
+
+| Date | Content | Commit |
+| ---- | ---- | ---- |
+| 2022.7.20 | Fix a critial bug in dynamic pulling | AlexCSTech/Node-Media-Server@1c2a807 |
+
+**If you like this project you can support the original author.** 
+
+See [illuspas/Node-Media-Server](https://github.com/illuspas/Node-Media-Server)
+
 
 # Web Admin Panel Source
 [https://github.com/illuspas/Node-Media-Server-Admin](https://github.com/illuspas/Node-Media-Server-Admin)
